@@ -37,10 +37,47 @@ export class AppComponent implements OnInit {
     return new Observable(sobrescrever => {
       if (nome === 'Luiz') {
         sobrescrever.next(`Olá ${nome}`)
-       
+
         setTimeout(() => {
           sobrescrever.next('Resposta com delay ' + nome)
         }, 3000)
+      } else {
+        sobrescrever.error('Erro ao detectar o nome')
+      }
+
+
+    })
+  }
+  usurarioObservable(nome: string, email: string): Observable<Usuario> {
+    return new Observable(sobrescrever => {
+      if (nome === 'Luiz') {
+        let usuario = new Usuario(nome, email)
+
+        setTimeout(() => {
+          sobrescrever.next(usuario)
+        }, 1000)
+
+        setTimeout(() => {
+          sobrescrever.next(usuario)
+        }, 2000)
+
+        setTimeout(() => {
+          sobrescrever.next(usuario)
+        }, 3000)
+
+        setTimeout(() => {
+          sobrescrever.next(usuario)
+        }, 4000)
+
+        setTimeout(() => {
+          sobrescrever.next(usuario)
+        }, 5000)
+        setTimeout(() => {
+          sobrescrever.next(usuario)
+        }, 6000)
+
+
+
       } else {
         sobrescrever.error('Erro ao detectar o nome')
       }
@@ -65,16 +102,36 @@ export class AppComponent implements OnInit {
     //this.minhaObservable('Luiz').subscribe({next:(resultado) =>console.log(resultado), error:(erro)=>console.log(erro)})
 
     const observer = {
-      next: (valor:string) => console.log('Next', valor),
-      error: (erro:string) => console.log('Erro', erro),
-      complete: () =>console.log('fim')
+      next: (valor: any) => console.log('Next', valor),
+      error: (erro: any) => console.log('Erro', erro),
+      complete: () => console.log('Fim')
     }
 
-    const obs = this.minhaObservable('Luiz')
-    obs.subscribe(observer)
- 
+    // const obs = this.minhaObservable('Luiz')
+    // obs.subscribe(observer)
+    
+    const obs = this.usurarioObservable('Luiz','luiz999@gmai.com')
+    const subs = obs.subscribe(observer)
+
+    //cancelando a subscription
+    setTimeout(()=>{
+      subs.unsubscribe()
+      console.log('Conexão fechada?: ' + subs.closed)
+    },3000)
   }
 
+ 
+
+}
+
+export class Usuario {
+
+  nome: string
+  email: string
+  constructor(nome: string, email: string) {
+    this.nome = nome;
+    this.email = email
+  }
 
 
 }
