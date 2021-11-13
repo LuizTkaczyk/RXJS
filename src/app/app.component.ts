@@ -119,9 +119,9 @@ export class AppComponent implements OnInit {
     //cancelando a subscription
     setTimeout(()=>{
       subs.unsubscribe()
-      //console.log('Conexão fechada?: ' + subs.closed)
+      
       console.log(`Conexão fechada : ${subs.closed ? "Sim" : "Não"}`)
-    },3000)
+    },6000)
   }
 }
 
