@@ -91,6 +91,9 @@ export class AppComponent implements OnInit {
     //  this.minhaPromise('Luiz').then(resultado =>{
     //    console.log(resultado)
     //  })
+
+
+
     //  this.minhaPromise('Luizz').then(resultado =>{
     //    console.log(resultado)
     //  }).catch(erro => console.log(erro))
@@ -116,12 +119,10 @@ export class AppComponent implements OnInit {
     //cancelando a subscription
     setTimeout(()=>{
       subs.unsubscribe()
-      console.log('Conexão fechada?: ' + subs.closed)
+      //console.log('Conexão fechada?: ' + subs.closed)
+      console.log(`Conexão fechada : ${subs.closed ? "Sim" : "Não"}`)
     },3000)
   }
-
- 
-
 }
 
 export class Usuario {
